@@ -1,0 +1,181 @@
+{
+  "activation_metadata": {
+    "activation_id": "EMSR927",
+    "title": "Flash Flood and GLOF in Nepal (August 2026)",
+    "glide_number": "FF-2026-000162-NPL",
+    "selected_reference_component": "EMSR927_AOI03_GRA_PRODUCT_v1",
+    "component_locality": "Bidur, Nuwakot District, Nepal",
+    "component_product_type": "Grading Product (GRA)",
+    "reference_event_class": "6-Mass Movement",
+    "reference_event_description": "Landslide / mudflow / scouring debris flow path mapped via photo-interpretation.",
+    "reference_optical_sensors": [
+      {
+        "sensor": "BlackSky",
+        "resolution_m": 1.0,
+        "datetime": "2026-08-27T12:09:00Z",
+        "sensor_type": "Optical VHR"
+      },
+      {
+        "sensor": "Satellogic",
+        "resolution_m": 0.8,
+        "datetime": "2026-08-27T04:22:00Z",
+        "sensor_type": "Optical VHR"
+      }
+    ],
+    "independent_sar_observation": {
+      "sensor": "Sentinel-1 RTC (C-band SAR, 10m grid, Orbit 19 Descending)",
+      "pre_event_datetime": "2026-08-24T00:18:57Z",
+      "post_event_datetime": "2026-09-05T00:18:57Z"
+    }
+  },
+  "spatial_evaluation_footprint": {
+    "evaluation_grid": "10m metric UTM Zone 45N (EPSG:32645)",
+    "exact_polygon_intersection_area_ha": 507.56,
+    "exact_polygon_intersection_area_sqkm": 5.08,
+    "rasterized_footprint_pixels": 50760,
+    "rasterized_footprint_area_ha": 507.6,
+    "rasterized_footprint_area_sqkm": 5.076,
+    "project_aoi_wgs84": [
+      85.15,
+      27.95,
+      85.25,
+      28.05
+    ],
+    "emsr927_aoi03_bbox": [
+      85.0992,
+      27.8567,
+      85.1929,
+      28.0091
+    ],
+    "footprint_reconciliation_note": "The exact geometric intersection of the EMSR927 AOI03 polygon and the challenge AOI is 507.56 ha (5.08 km2). Projected onto the 10m master metric grid (all_touched=False), exactly 50,760 pixel centroids fall inside the boundary (507.60 ha). The difference is 426.5 m2 (0.0084%) due to discrete half-pixel boundary quantization. The earlier 24.45 km2 figure resulted from an axis-aligned bounding-box intersection, whereas AOI03 is an irregular non-axis-aligned polygon."
+  },
+  "evaluation_methodology_reconciliation": {
+    "primary_evaluation": "Raw-pixel confusion matrix (evaluates direct un-sieved 10m raster outputs).",
+    "postprocessed_evaluation": "Vector-derived statistics (evaluates polygonized GeoJSON after min_area_sqm=500.0 spatial sieving in mask_to_geojson_features, which removes isolated <5-pixel noise clusters)."
+  },
+  "scientific_integrity_and_semantic_divergence": {
+    "semantic_target_relationship": "INDEPENDENT SPATIAL-OVERLAP ANALYSIS (Semantically and Temporally Divergent)",
+    "analytical_independence": "EMSR927 vector products were accessed solely as a post-inference independent external comparison. They were strictly isolated from pipeline training, preprocessing, inference, threshold selection, and post-filtering.",
+    "semantic_divergence_statement": "Because SNUNet-ECAM targets standing flood water (Class 2) and CEMS mapped mass-movement/debris scars (6-Mass Movement) from earlier sub-meter optical imagery (27 August 2026), the two products have fundamentally different target semantics and observation dates (5 September 2026 for Sentinel-1 SAR). This comparison is therefore an independent spatial-overlap analysis comparing physical candidate change and neural water extents with mapped event deposits, rather than a direct flood-water accuracy validation.",
+    "temporal_divergence_statement": "CEMS optical imagery was acquired on 27 August 2026 (1 day post-peak); Sentinel-1 post-event SAR was acquired on 5 September 2026 (9 days later), over which time transient flash floods drained completely into normal stream channels.",
+    "radar_scouring_physical_mechanism": "The classical radar backscatter drop detector (delta_VV < -3 dB) captures severe microwave volume scattering loss and surface scouring along the debris track, successfully identifying 37.58 ha (vector) / 40.32 ha (raw) of the mass-movement corridor with 65-68% precision."
+  },
+  "snunet_class_mapping_audit": {
+    "verified_checkpoint_classes": {
+      "0": "No water (land / background)",
+      "1": "Permanent water (rivers, lakes, reservoirs)",
+      "2": "Flood water (inundated terrain / temporary flood extent)"
+    },
+    "positive_prediction_semantics": "The neural positive mask strictly evaluates original Class 2 (Flood Water). Original Class 1 (Permanent Water) is isolated as a distinct reference baseline and excluded from flood metrics."
+  },
+  "evaluations": {
+    "snunet_neural_flood_water_raw": {
+      "prediction_layer": "SNUNet-ECAM Neural Flood Water (Raw Pixel Raster, Class 2)",
+      "layer_description": "Un-sieved raw pixel predictions where argmax == 2 (Flood Water).",
+      "pixel_counts": {
+        "evaluation_footprint_pixels": 50760,
+        "candidate_change_pixels": 179,
+        "reference_event_pixels": 15756,
+        "true_positive_pixels": 44,
+        "false_positive_pixels": 135,
+        "false_negative_pixels": 15712,
+        "true_negative_pixels": 34869
+      },
+      "areas": {
+        "candidate_change_area_ha": 1.79,
+        "candidate_change_area_sqkm": 0.0179,
+        "reference_event_area_ha": 157.56,
+        "reference_event_area_sqkm": 1.5756,
+        "intersection_area_ha": 0.44,
+        "intersection_area_sqkm": 0.0044
+      },
+      "spatial_overlap_metrics": {
+        "fraction_of_candidate_change_overlapping_reference_precision": 0.2458,
+        "fraction_of_reference_event_overlapped_recall": 0.0028,
+        "intersection_over_union_iou": 0.0028,
+        "dice_coefficient_f1": 0.0055
+      }
+    },
+    "snunet_neural_flood_water_vector": {
+      "prediction_layer": "SNUNet-ECAM Neural Flood Water (Polygonized Vector, Class 2)",
+      "layer_description": "Polygonized flood extent from snunet_flood_extent.geojson (500m2 area threshold applied).",
+      "pixel_counts": {
+        "evaluation_footprint_pixels": 50760,
+        "candidate_change_pixels": 62,
+        "reference_event_pixels": 15756,
+        "true_positive_pixels": 15,
+        "false_positive_pixels": 47,
+        "false_negative_pixels": 15741,
+        "true_negative_pixels": 34957
+      },
+      "areas": {
+        "candidate_change_area_ha": 0.62,
+        "candidate_change_area_sqkm": 0.0062,
+        "reference_event_area_ha": 157.56,
+        "reference_event_area_sqkm": 1.5756,
+        "intersection_area_ha": 0.15,
+        "intersection_area_sqkm": 0.0015
+      },
+      "spatial_overlap_metrics": {
+        "fraction_of_candidate_change_overlapping_reference_precision": 0.2419,
+        "fraction_of_reference_event_overlapped_recall": 0.001,
+        "intersection_over_union_iou": 0.0009,
+        "dice_coefficient_f1": 0.0019
+      }
+    },
+    "classical_radar_change_raw": {
+      "prediction_layer": "Classical Radar Change Detection (Raw Pixel Raster, delta_VV < -3 dB & slope <= 25 deg)",
+      "layer_description": "Physical radar backscatter reduction candidate change pixels before spatial sieving.",
+      "pixel_counts": {
+        "evaluation_footprint_pixels": 50760,
+        "candidate_change_pixels": 6206,
+        "reference_event_pixels": 15756,
+        "true_positive_pixels": 4032,
+        "false_positive_pixels": 2174,
+        "false_negative_pixels": 11724,
+        "true_negative_pixels": 32830
+      },
+      "areas": {
+        "candidate_change_area_ha": 62.06,
+        "candidate_change_area_sqkm": 0.6206,
+        "reference_event_area_ha": 157.56,
+        "reference_event_area_sqkm": 1.5756,
+        "intersection_area_ha": 40.32,
+        "intersection_area_sqkm": 0.4032
+      },
+      "spatial_overlap_metrics": {
+        "fraction_of_candidate_change_overlapping_reference_precision": 0.6497,
+        "fraction_of_reference_event_overlapped_recall": 0.2559,
+        "intersection_over_union_iou": 0.2249,
+        "dice_coefficient_f1": 0.3672
+      }
+    },
+    "classical_radar_change_vector": {
+      "prediction_layer": "Classical Radar Change Detection (Polygonized Vector)",
+      "layer_description": "Polygonized candidate flood extent from baseline_candidate_flood.geojson (500m2 threshold).",
+      "pixel_counts": {
+        "evaluation_footprint_pixels": 50760,
+        "candidate_change_pixels": 5553,
+        "reference_event_pixels": 15756,
+        "true_positive_pixels": 3758,
+        "false_positive_pixels": 1795,
+        "false_negative_pixels": 11998,
+        "true_negative_pixels": 33209
+      },
+      "areas": {
+        "candidate_change_area_ha": 55.53,
+        "candidate_change_area_sqkm": 0.5553,
+        "reference_event_area_ha": 157.56,
+        "reference_event_area_sqkm": 1.5756,
+        "intersection_area_ha": 37.58,
+        "intersection_area_sqkm": 0.3758
+      },
+      "spatial_overlap_metrics": {
+        "fraction_of_candidate_change_overlapping_reference_precision": 0.6768,
+        "fraction_of_reference_event_overlapped_recall": 0.2385,
+        "intersection_over_union_iou": 0.2141,
+        "dice_coefficient_f1": 0.3527
+      }
+    }
+  }
+}

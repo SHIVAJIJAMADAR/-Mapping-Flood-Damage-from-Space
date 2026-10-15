@@ -1,0 +1,325 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>One-Page Flood Situation Report — Trishuli River Corridor, Nepal</title>
+  <style>
+    @page {
+      size: A4 portrait;
+      margin: 0;
+    }
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+      color: #1e293b;
+      background: #ffffff;
+      width: 210mm;
+      height: 297mm;
+      max-height: 297mm;
+      padding: 9mm 10mm;
+      overflow: hidden;
+      font-size: 8.5pt;
+      line-height: 1.25;
+    }
+    .header {
+      border-bottom: 2px solid #0284c7;
+      padding-bottom: 5px;
+      margin-bottom: 7px;
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-end;
+    }
+    .header-left h1 {
+      font-size: 15pt;
+      font-weight: 800;
+      color: #0f172a;
+      letter-spacing: -0.02em;
+    }
+    .header-left p {
+      font-size: 8.5pt;
+      color: #0284c7;
+      font-weight: 600;
+      margin-top: 1px;
+    }
+    .header-right {
+      text-align: right;
+      font-size: 7.5pt;
+      color: #64748b;
+    }
+    .kpi-row {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 6px;
+      margin-bottom: 7px;
+    }
+    .kpi-card {
+      background: #f8fafc;
+      border: 1px solid #e2e8f0;
+      border-left: 3px solid #0284c7;
+      border-radius: 4px;
+      padding: 5px 7px;
+    }
+    .kpi-card.alert {
+      border-left-color: #ef4444;
+      background: #fff5f5;
+    }
+    .kpi-card.warn {
+      border-left-color: #f59e0b;
+      background: #fffbeb;
+    }
+    .kpi-title {
+      font-size: 6.8pt;
+      text-transform: uppercase;
+      font-weight: 700;
+      color: #64748b;
+      margin-bottom: 2px;
+    }
+    .kpi-value {
+      font-size: 12pt;
+      font-weight: 800;
+      color: #0f172a;
+    }
+    .kpi-card.alert .kpi-value { color: #dc2626; }
+    .kpi-card.warn .kpi-value { color: #d97706; }
+    .kpi-sub {
+      font-size: 6.8pt;
+      color: #475569;
+      margin-top: 1px;
+    }
+    .main-grid {
+      display: grid;
+      grid-template-columns: 112mm 74mm;
+      gap: 8px;
+      margin-bottom: 6px;
+    }
+    .map-box {
+      border: 1px solid #cbd5e1;
+      border-radius: 4px;
+      overflow: hidden;
+      background: #0f172a;
+    }
+    .map-box img {
+      width: 100%;
+      height: 105mm;
+      object-fit: cover;
+      display: block;
+    }
+    .map-legend {
+      background: #1e293b;
+      color: #f8fafc;
+      padding: 4px 6px;
+      font-size: 6.5pt;
+      display: flex;
+      justify-content: space-around;
+      align-items: center;
+    }
+    .legend-item {
+      display: flex;
+      align-items: center;
+      gap: 3px;
+    }
+    .legend-box {
+      width: 8px;
+      height: 8px;
+      border-radius: 1px;
+    }
+    .section-title {
+      font-size: 8pt;
+      font-weight: 800;
+      color: #0f172a;
+      text-transform: uppercase;
+      border-bottom: 1.5px solid #e2e8f0;
+      padding-bottom: 2px;
+      margin-bottom: 4px;
+    }
+    .table-compact {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 7.2pt;
+      margin-bottom: 6px;
+    }
+    .table-compact th {
+      background: #f1f5f9;
+      text-align: left;
+      padding: 3px 4px;
+      color: #475569;
+      font-weight: 700;
+      border-bottom: 1px solid #cbd5e1;
+    }
+    .table-compact td {
+      padding: 2.5px 4px;
+      border-bottom: 1px solid #f1f5f9;
+      color: #1e293b;
+    }
+    .table-compact tr:last-child td {
+      border-bottom: none;
+    }
+    .badge-rose {
+      background: #fee2e2;
+      color: #b91c1c;
+      font-weight: 700;
+      padding: 1px 3px;
+      border-radius: 2px;
+    }
+    .badge-amber {
+      background: #fef3c7;
+      color: #b45309;
+      font-weight: 700;
+      padding: 1px 3px;
+      border-radius: 2px;
+    }
+    .badge-emerald {
+      background: #dcfce7;
+      color: #15803d;
+      font-weight: 700;
+      padding: 1px 3px;
+      border-radius: 2px;
+    }
+    .text-box {
+      background: #f8fafc;
+      border: 1px solid #e2e8f0;
+      border-radius: 4px;
+      padding: 5px 6px;
+      font-size: 7.2pt;
+      margin-bottom: 6px;
+    }
+    .limitations-box {
+      background: #fffbeb;
+      border: 1px solid #fde68a;
+      border-left: 3px solid #f59e0b;
+      border-radius: 4px;
+      padding: 5px 7px;
+      font-size: 6.8pt;
+      color: #92400e;
+      margin-bottom: 6px;
+    }
+    .limitations-box strong {
+      color: #78350f;
+    }
+    .footer {
+      border-top: 1px solid #cbd5e1;
+      padding-top: 4px;
+      font-size: 6.2pt;
+      color: #64748b;
+      display: flex;
+      justify-content: space-between;
+      line-height: 1.2;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Header -->
+  <div class="header">
+    <div class="header-left">
+      <h1>RAPID FLOOD DAMAGE & CONNECTIVITY SITUATION REPORT</h1>
+      <p>Trishuli & Bhote Koshi River Corridor, Rasuwa / Nuwakot Districts, Nepal</p>
+    </div>
+    <div class="header-right">
+      <strong>Event Date:</strong> 2026-08-26 (Flash Flood / GLOF)<br>
+      <strong>Analysis Run ID:</strong> flood_20261014_082338_45889d<br>
+      <strong>Report Generated:</strong> 2026-10-14 17:30 UTC
+    </div>
+  </div>
+
+  <!-- KPI Summary Cards -->
+  <div class="kpi-row">
+    <div class="kpi-card">
+      <div class="kpi-title">SNUNet Neural Inundation</div>
+      <div class="kpi-value">0.0287 km²</div>
+      <div class="kpi-sub">2.87 ha (Deep Siamese Model)</div>
+    </div>
+    <div class="kpi-card warn">
+      <div class="kpi-title">Candidate Radar Change</div>
+      <div class="kpi-value">1.3810 km²</div>
+      <div class="kpi-sub">138.1 ha (&Delta;VV &lt; -3 dB Drop)</div>
+    </div>
+    <div class="kpi-card alert">
+      <div class="kpi-title">Exposed Highway Assets</div>
+      <div class="kpi-value">12 Ways</div>
+      <div class="kpi-sub">190.1 m Submerged (1,436 Fragments)</div>
+    </div>
+    <div class="kpi-card alert">
+      <div class="kpi-title">Isolated Settlements</div>
+      <div class="kpi-value">2 Cut-Off</div>
+      <div class="kpi-sub">Laharepauwa, Dhunge (2 Detoured)</div>
+    </div>
+  </div>
+
+  <!-- Main Content Grid: Map (Left) + Detailed Findings (Right) -->
+  <div class="main-grid">
+    <!-- Map Box -->
+    <div class="map-box">
+      <img src="situation_map.png" alt="Situation Map">
+      <div class="map-legend">
+        <div class="legend-item"><div class="legend-box" style="background:#00d2ff;"></div> SNUNet Flood Water (2.87 ha)</div>
+        <div class="legend-item"><div class="legend-box" style="background:#06b6d4;"></div> Permanent River (10.7 ha)</div>
+        <div class="legend-item"><div class="legend-box" style="background:#f59e0b;"></div> Candidate Change (138 ha)</div>
+        <div class="legend-item"><div class="legend-box" style="background:#ef4444;"></div> Exposed Road / Cut-Off</div>
+      </div>
+    </div>
+
+    <!-- Right Side Analytics -->
+    <div class="side-col">
+      <!-- Observation Metadata -->
+      <div class="section-title">Satellite Observation Baseline</div>
+      <table class="table-compact">
+        <tr><th>Parameter</th><th>Analytical Specification</th></tr>
+        <tr><td>Sensor / Mode</td><td>Sentinel-1 RTC (C-band SAR, 10m grid)</td></tr>
+        <tr><td>Pre-Event Pass</td><td><strong>2026-08-24</strong> 00:18 UTC (Orbit 19 Descending)</td></tr>
+        <tr><td>Post-Event Pass</td><td><strong>2026-09-05</strong> 00:18 UTC (Orbit 19 Descending)</td></tr>
+        <tr><td>Analysis Extent</td><td>85.15°E–85.25°E, 27.95°N–28.05°N</td></tr>
+        <tr><td>Unpadded Valid AOI</td><td><strong>109.51 km²</strong> (Padded grid: 118.05 km²)</td></tr>
+        <tr><td>Elevation Range</td><td>512 m to 3,485 m (Copernicus DEM 30m)</td></tr>
+      </table>
+
+      <!-- Settlement Accessibility -->
+      <div class="section-title">Settlement Accessibility (Conservative Corridor Closure)</div>
+      <table class="table-compact">
+        <tr><th>Settlement</th><th>Baseline</th><th>Post-Event Status</th></tr>
+        <tr><td><strong>Laharepauwa</strong></td><td>5.31 km</td><td><span class="badge-rose">CUT-OFF (Corridor Closure)</span></td></tr>
+        <tr><td><strong>Dhunge</strong></td><td>3.08 km</td><td><span class="badge-rose">CUT-OFF (Corridor Closure)</span></td></tr>
+        <tr><td><strong>Tupche</strong></td><td>4.99 km</td><td><span class="badge-amber">DETOURED (+0.68 km)</span></td></tr>
+        <tr><td><strong>Uttargaya</strong></td><td>7.37 km</td><td><span class="badge-amber">DETOURED (+4.42 km)</span></td></tr>
+        <tr><td><strong>23 Other Hamlets</strong></td><td>Variable</td><td><span class="badge-emerald">UNAFFECTED (incl. Betrawati)</span></td></tr>
+      </table>
+
+      <!-- Infrastructure Impact -->
+      <div class="section-title">Infrastructure Exposure Summary</div>
+      <div class="text-box">
+        <strong>Road Network:</strong> 12 unique OSM highway ways (totalling 190.1 m direct intersection) are inundated by the primary flood extent. Under the conservative corridor closure model (closing entire breached ways), 1,436 graph edge fragments (26.14 km) are removed. Strict fragment-level traversal severs 25 edges (383.9 m) with 0 cut-offs.<br>
+        <strong>Bridge Infrastructure:</strong> 25 bridges assessed within the AOI; 0 confirmed bridge structural collapses under primary flood extent.
+      </div>
+    </div>
+  </div>
+
+  <!-- Operational Interpretation -->
+  <div class="section-title">Operational Interpretation & Synthesis</div>
+  <div class="text-box" style="margin-bottom: 5px;">
+    <strong>Highland Surge & Cross-Hazard Dynamics:</strong> On 26 August 2026, severe flash flooding and debris flows surged down the Trishuli corridor. SNUNet-ECAM deep Siamese segmentation identifies <strong>2.87 hectares</strong> of filtered standing flood water (41 polygons &ge; 500 m²; 15.76 ha raw raster) along river terraces. Meanwhile, classical radar drop (&Delta;VV &lt; -3 dB, slope &le; 15&deg;) reveals <strong>138.10 hectares</strong> of physical surface alteration and debris scouring. In the <strong>5.08 km²</strong> shared evaluation area with Copernicus EMS activation <strong>EMSR927</strong> (AOI03 Bidur, an optical mass-movement grading product mapped on 27 Aug), classical radar drop captured <strong>37.58 ha</strong> of the debris track with <strong>67.7% precision</strong> and <strong>21.4% IoU</strong>. This comparison is strictly an independent cross-hazard spatial overlap analysis, not flood ground truth. Two settlements (Laharepauwa, Dhunge) lose road access under the conservative corridor-level closure scenario.
+  </div>
+
+  <!-- Limitations & Quality Notice -->
+  <div class="limitations-box">
+    <strong>DATA QUALITY, UNCERTAINTIES & MANDATORY METHODOLOGICAL DISCLOSURES:</strong><br>
+    &bull; <strong>Corridor-Level Closure Scenario:</strong> Cut-off hamlets reflect a conservative whole-way closure assumption (severing all 26.14 km of breached ways, including 25.95 km outside the 190.1 m flood intersection). Localized point traversal yields 0 cut-offs.<br>
+    &bull; <strong>Building Inventory Completeness:</strong> Pre-disaster OSM building footprints were query-capped at 1,000 features due to API limits. Zero exposed buildings reflects this mapped sample subset and does not guarantee structural safety of unmapped dwellings.<br>
+    &bull; <strong>Observation & Sensor Semantics:</strong> Sentinel-1 SAR was acquired on 5 Sept 2026 (9 days post-event). SNUNet targets standing water; EMSR927 maps optical mass-movement deposits.
+  </div>
+
+  <!-- Footer Attributions -->
+  <div class="footer">
+    <div>
+      Contains modified Copernicus Sentinel data 2026. Produced using Copernicus WorldDEM-30 &copy; DLR e.V. 2010&ndash;2014 and &copy; Airbus Defence and Space GmbH 2014&ndash;2018.
+    </div>
+    <div>
+      &copy; OpenStreetMap contributors (ODbL). Neural model: Kuro Siwo Siamese U-Net++ (Bountos et al., NeurIPS 2024).
+    </div>
+  </div>
+
+</body>
+</html>

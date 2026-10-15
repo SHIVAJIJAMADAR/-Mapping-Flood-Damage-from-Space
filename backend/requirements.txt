@@ -1,0 +1,31 @@
+# Flood Intelligence Platform - Backend Requirements
+# Multimodal AI Hackathon 2026 - Track B: Mapping Flood Damage from Space
+# Target Runtime: Windows 11 AMD64, Python 3.13, NVIDIA RTX 4050 Laptop GPU (CUDA 12.4)
+
+# PyTorch with CUDA 12.4
+--extra-index-url https://download.pytorch.org/whl/cu124
+torch==2.6.0+cu124
+torchvision==0.21.0+cu124
+
+# API Service & Web
+fastapi>=0.115.0
+uvicorn[standard]>=0.32.0
+pydantic>=2.9.0
+httpx>=0.27.0
+requests>=2.32.0
+
+# Geospatial Engine & STAC Data Access
+rasterio>=1.4.0
+shapely>=2.0.6
+pyogrio>=0.10.0
+geopandas>=1.0.1
+pystac>=1.10.0
+pystac-client>=0.8.5
+pyproj>=3.7.0
+
+# Numerical & Scientific Computing
+numpy>=2.0.0
+scipy>=1.14.0
+
+# Testing & Smoke Validation
+pytest>=8.3.0
